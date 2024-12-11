@@ -8,11 +8,9 @@ namespace OOD_Final.EnemyClass
 {
     public class Dragon : Enemy
     {
-        public Dragon() : base("Dragon", 120) { }
-
-        public override string GetDescription()
+        public Dragon(string type, int hitPoints, int attackPower)
+            : base(type, hitPoints, attackPower)
         {
-            return "A formidable foe.";
         }
     }
 }

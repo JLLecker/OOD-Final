@@ -66,7 +66,7 @@
     <Compile Include="Factories\EnemyFactory.cs" />
     <Compile Include="Interfaces\IAction.cs" />
     <Compile Include="Interfaces\IObserver.cs" />
-    <Compile Include="Interfaces\ISub.cs" />
+    <Compile Include="Interfaces\ISubject.cs" />
     <Compile Include="Notifications\HUD.cs" />
     <Compile Include="Notifications\Sound.cs" />
     <Compile Include="Program.cs" />

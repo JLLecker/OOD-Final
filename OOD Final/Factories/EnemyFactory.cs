@@ -9,20 +9,27 @@ namespace OOD_Final.Factories
 {
     public class EnemyFactory
     {
-        public static Enemy CreateRandomEnemy(Random random)
-        {
-            string[] enemyTypes = { "Balrog", "Dragon", "Ent", "Hellhound", "Kobold" };
-            string enemyType = enemyTypes[random.Next(enemyTypes.Length)];
 
-            switch (enemyType)
+        public static Enemy CreateRandomEnemy()
+        {
+            var random = new Random();
+            var enemyArray = new[] { "balrog", "dragon", "ent", "hellhound", "kobold" };
+            var randomEnemy = enemyArray[random.Next(enemyArray.Length)];
+            switch (randomEnemy.ToLower())
             {
-                case "Balrog": return new Balrog();
-                case "Dragon": return new Dragon();
-                case "Ent": return new Ent();
-                case "Hellhound": return new Hellhound();
-                case "Kobold": return new Kobold();
-                default: return null;
-            };
+                case "balrog":
+                    return new Balrog("Balrog", 300, 50);
+                case "dragon":
+                    return new Dragon("Dragon", 400, 60);
+                case "ent":
+                    return new Ent("Ent", 250, 30);
+                case "hellhound":
+                    return new Hellhound("Hellhound", 200, 40);
+                case "kobold":
+                    return new Kobold("Kobold", 100, 15);
+                default:
+                    throw new ArgumentException($"Unknown enemy type: {randomEnemy}");
+            }
         }
     }
 }

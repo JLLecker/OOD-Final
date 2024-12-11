@@ -8,11 +8,9 @@ namespace OOD_Final.EnemyClass
 {
     public class Kobold : Enemy
     {
-        public Kobold() : base("Kobold", 23) { }
-
-        public override string GetDescription()
+        public Kobold(string type, int hitPoints, int attackPower)
+            : base(type, hitPoints, attackPower)
         {
-            return "A mischievous little creature, quick and nimble.";
         }
     }
 }

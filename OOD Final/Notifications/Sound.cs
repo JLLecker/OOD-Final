@@ -11,7 +11,7 @@ namespace OOD_Final.Notifications
     {
         public void Update(string eventNotification)
         {
-            Console.WriteLine($"Sound Notification: {eventNotification}"); // Update to sound notification
+            Console.WriteLine($"Sound Notification: {eventNotification}");
         }
     }
 }

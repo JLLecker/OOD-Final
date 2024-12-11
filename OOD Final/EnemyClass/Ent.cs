@@ -8,11 +8,9 @@ namespace OOD_Final.EnemyClass
 {
     public class Ent : Enemy
     {
-        public Ent() : base("Ent", 80) { }
-
-        public override string GetDescription()
+        public Ent(string type, int hitPoints, int attackPower)
+            : base(type, hitPoints, attackPower)
         {
-            return "A stout, sentient tree.";
         }
     }
 }

@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using OOD_Final.Actions;
+using OOD_Final.Interfaces;
 
 namespace OOD_Final.CharClass
 {
     public class Archer : Character
     {
-        public Archer(string name) : base(name)
+        public Archer(string name, string classType, int health, int attackPower, IAction primaryAttack, IAction secondaryAttack)
+            : base(name, classType, health, attackPower, primaryAttack, secondaryAttack)
         {
-            HP = 80;
         }
-
-        public override string GetRole() => "Archer (Low defense and high mobility with ranged attacks)";
     }
 }

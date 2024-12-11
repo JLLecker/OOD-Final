@@ -11,14 +11,14 @@ namespace OOD_Final
     {
         private IAction _action;
 
-        public ActionContext(IAction action)
+        public ActionContext(IAction mainAction)
         {
-            _action = action;
+            _action = mainAction;
         }
 
-        public void SetAction(IAction action)
+        public void SetAction(IAction newAction)
         {
-            _action = action;
+            _action = newAction;
         }
 
         public string PerformAction()

@@ -8,26 +8,59 @@ namespace OOD_Final.EnemyClass
 {
     public abstract class Enemy
     {
+        private static readonly Random random = new Random();
         public string Name { get; set; }
-        public int HP { get; set; }
+        public string Type { get; set; }
+        public int HitPoints { get; set; }
+        public int AttackPower { get; set; }
 
-        public Enemy(string name, int health)
+        protected Enemy(string type, int hitPoints, int attackPower)
         {
-            Name = name;
-            HP = health;
+            Name = type;
+            Type = type;
+            HitPoints = hitPoints;
+            AttackPower = attackPower;
         }
 
-        public abstract string GetDescription();
+        public override string ToString()
+        {
+            return $"{Type} - HP: {HitPoints}, ATK: {AttackPower}";
+        }
+
+        // Attack Roll 
+        public int AttackRoll(Enemy enemy)
+        {
+            int roll = random.Next(1, 11); // random roll between 1-10
+
+            // 1-3 = miss, 4-9 = attack, 10 = crit
+            if (roll <= 3)
+            {
+                Console.WriteLine($"{this.Name} missed! 0 damage done!");
+                return 0;
+            }
+            else if (roll > 3 && roll <= 9)
+            {
+                int baseDmg = this.AttackPower;
+                Console.WriteLine($"{this.Name} attacks for {baseDmg} damage!");
+                return baseDmg;
+            }
+            else // 10
+            {
+                int baseDmg = this.AttackPower * 2;
+                Console.WriteLine($"{this.Name} landed a critical hit for {baseDmg} damage!");
+                return baseDmg;
+            }
+        }
 
         public void TakeDamage(int damage)
         {
-            HP -= damage;
-            if (HP < 0) HP = 0;
+            HitPoints -= damage;
+            if (HitPoints < 0) HitPoints = 0;
         }
 
         public bool IsAlive()
         {
-            return HP > 0;
+            return HitPoints > 0;
         }
     }
 

@@ -8,11 +8,9 @@ namespace OOD_Final.EnemyClass
 {
     public class Balrog : Enemy
     {
-        public Balrog() : base("Balrog", 115) { }
-
-        public override string GetDescription()
-        {
-            return "A large, fiery beast.";
+        public Balrog(string type, int hitPoints, int attackPower) 
+            : base(type, hitPoints, attackPower) 
+        { 
         }
     }
 }
