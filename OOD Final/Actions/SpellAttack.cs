@@ -9,6 +9,9 @@ namespace OOD_Final.Actions
 {
     public class SpellAttack : IAction
     {
-        public string Attack() => "Throws a ball of fire toward the enemy!";
+        public string Attack() // returns atk details
+        {
+            return "You throw a ball of fire toward the enemy!";
+        }
     }
 }

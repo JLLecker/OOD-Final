@@ -9,6 +9,9 @@ namespace OOD_Final.Actions
 {
     public class ShieldAttack : IAction
     {
-        public string Attack() => "Shield bashes the enemy!";
+        public string Attack() // returns atk details
+        {
+            return "You shield bash the enemy!";
+        }
     }
 }

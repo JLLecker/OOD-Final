@@ -10,20 +10,33 @@ namespace OOD_Final
     public class ActionContext
     {
         private IAction _action;
+        public List<IAction> Actions { get; }
 
-        public ActionContext(IAction mainAction)
+        public ActionContext(List<IAction> actions)
         {
-            _action = mainAction;
+            if (actions == null || actions.Count == 0) // logic check for null
+            {
+                throw new System.ArgumentException("Actions cannot be null or empty.");
+            }
+            Actions = actions;
+            _action = actions[0]; // Default to the first action
         }
 
-        public void SetAction(IAction newAction)
+        // set the current action to perform
+        public void SetAction(IAction action)
         {
-            _action = newAction;
+            if (!Actions.Contains(action)) // check action is in list
+            {
+                throw new System.ArgumentException("Action not found in the available actions list.");
+            }
+
+            _action = action;
         }
 
+        // perform the action in setaction
         public string PerformAction()
         {
-            return _action.Attack();
+            return _action.Attack(); // returns action details
         }
     }
 }

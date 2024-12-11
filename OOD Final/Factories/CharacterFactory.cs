@@ -1,41 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OOD_Final.Actions;
-using OOD_Final.CharClass;
 using OOD_Final.Interfaces;
 
 namespace OOD_Final.Factories
 {
     public class CharacterFactory
     {
-        public static (Character, ActionContext) CreateCharacter(string type, string name)
-        {
-            Character character;
-
-            switch (type.ToLower())
+        // Dictionary to store character configurations
+        private static readonly Dictionary<string, (int HitPoints, int AttackPower, List<IAction> Actions)> characterConfigs =
+            new Dictionary<string, (int, int, List<IAction>)>
             {
-                case "warrior":
-                    character = new Warrior(name, "Warrior", 250, 40, new MeleeAttack(), new ShieldAttack());
-                    break;
-                case "mage":
-                    character = new Mage(name, "Mage", 200, 45, new SpellAttack(), new SneakAttack());
-                    break;
-                case "thief":
-                    character = new Thief(name, "Thief", 220, 50, new SneakAttack(), new MeleeAttack());
-                    break;
-                case "archer":
-                    character = new Archer(name, "Archer", 210, 30, new RangedAttack(), new SneakAttack());
-                    break;
-                case "knight":
-                    character = new Knight(name, "Knight", 400, 20, new ShieldAttack(), new MeleeAttack());
-                    break;
-                default:
-                    throw new ArgumentException($"Invalid character class: '{type}'. Valid options are Mage, Warrior, Archer, Thief, Knight.");
+                {
+                    "warrior",
+                    (250, 40, new List<IAction> { new MeleeAttack(), new ShieldAttack() })
+                },
+                {
+                    "mage",
+                    (200, 45, new List<IAction> { new SpellAttack(), new SneakAttack() })
+                },
+                {
+                    "thief",
+                    (220, 50, new List<IAction> { new SneakAttack(), new MeleeAttack() })
+                },
+                {
+                    "archer",
+                    (210, 30, new List<IAction> { new RangedAttack(), new SneakAttack() })
+                },
+                {
+                    "knight",
+                    (400, 20, new List<IAction> { new ShieldAttack(), new MeleeAttack() })
+                }
             };
 
+        public static (Character, ActionContext) CreateCharacter(string type, string name)
+        {
+            // Convert type to lowercase for consistency
+            type = type.ToLower();
+
+            // Check if the character type exists
+            if (!characterConfigs.TryGetValue(type, out var config))
+            {
+                throw new ArgumentException($"Invalid character class: '{type}'. Valid options are Warrior, Mage, Archer, Thief, Knight.");
+            }
+
+            // Create a new character using the configuration
+            var character = new Character(name, type, config.HitPoints, config.AttackPower, config.Actions);
             return (character, character.ActionContext);
         }
     }

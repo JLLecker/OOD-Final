@@ -11,6 +11,7 @@ namespace OOD_Final.EnemyClass
         public Ent(string type, int hitPoints, int attackPower)
             : base(type, hitPoints, attackPower)
         {
+            // custom properties
         }
     }
 }

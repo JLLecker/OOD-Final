@@ -9,6 +9,9 @@ namespace OOD_Final.Actions
 {
     public class SneakAttack : IAction
     {
-        public string Attack() => "Makes a sneak attack from behind!";
+        public string Attack() // returns atk details
+        {
+            return "You make a sneak attack from behind!";
+        }
     }
 }

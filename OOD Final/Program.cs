@@ -104,6 +104,7 @@ namespace OOD_Final
                     {
                         case "1":
                             characterResult = character.PerformPrimaryAttack(); // Displays attack type
+                            characterNotifier.NotifyObservers(actionContext.PerformAction());
                             int rollResult = character.AttackRoll(character); // Returns attack dmg
                             enemy.TakeDamage(rollResult);
 
@@ -127,9 +128,15 @@ namespace OOD_Final
                         case "4":
                             characterResult = character.Flee();
                             characterNotifier.NotifyObservers(characterResult);
+                            if (characterResult.Length < 30)
+                            {
                             characterNotifier.NotifyObservers($"Your health: {character.HitPoints} HP");
+                            }
+                            else
+                            {
                             inCombat = false; // exit combat loop
-                            continue;
+                            }
+                            break;
 
                         default:
                             Console.WriteLine("Invalid action. Please choose again.");
@@ -137,7 +144,7 @@ namespace OOD_Final
                     }
 
 
-                    if (enemy.IsAlive())
+                    if (enemy.IsAlive() && inCombat)
                     {
                         int enemyDamage = enemy.AttackRoll(enemy);
                         character.TakeDamage(enemyDamage);

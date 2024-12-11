@@ -9,6 +9,9 @@ namespace OOD_Final.Actions
 {
     public class RangedAttack : IAction
     {
-        public string Attack() => "Takes aim and shoots an arrow!";
+        public string Attack() // returns atk details
+        {
+            return "You take aim and shoot an arrow!";
+        }
     }
 }

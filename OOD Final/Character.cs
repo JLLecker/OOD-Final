@@ -8,35 +8,54 @@ using OOD_Final.Interfaces;
 
 namespace OOD_Final
 {
-    public abstract class Character
+    public class Character
     {
-        private static readonly Random random = new Random();
+        private static readonly Random random = new Random(); // for random attack roll
         public string Name { get; set; }
         public string ClassType { get; set; }
         public int HitPoints { get; set; }
         public int AttackPower { get; set; }
         public ActionContext ActionContext { get; set; }
-        public IAction SecondaryAttack { get; set; }
+        public List<IAction> Actions { get; }
 
-        protected Character(string name, string classType, int hitPoints, int attackPower, IAction primaryAttack, IAction secondaryAttack) 
+
+        public Character(string name, string classType, int hitPoints, int attackPower, List<IAction> actions) 
         {
             Name = name;
             ClassType = classType;
             HitPoints = hitPoints;
             AttackPower = attackPower;
-            ActionContext = new ActionContext(primaryAttack);
-            SecondaryAttack = secondaryAttack;
+            ActionContext = new ActionContext(actions);
+            Actions = actions;
         }
 
+        // tostring for character info
         public override string ToString()
         {
             return $"{Name} ({ClassType}) - HP: {HitPoints}, ATK: {AttackPower}";
         }
 
-        public string PerformPrimaryAttack() => ActionContext.PerformAction();
+        // Perform the primary action (first in list)
+        public string PerformPrimaryAttack()
+        {
+            if (Actions.Count == 0)
+            {
+                throw new InvalidOperationException("No actions available for this character.");
+            }
+
+            ActionContext.SetAction(Actions[0]);
+            return ActionContext.PerformAction();
+        }
+
+        // Perform the secondary action (second in list)
         public string PerformSecondaryAttack()
         {
-            ActionContext.SetAction(SecondaryAttack);
+            if (Actions.Count < 2)
+            {
+                throw new InvalidOperationException("No secondary action available for this character.");
+            }
+
+            ActionContext.SetAction(Actions[1]); // assign secondary attack
             return ActionContext.PerformAction();
         }
 
@@ -49,15 +68,15 @@ namespace OOD_Final
             if (roll == 1)
             {
                 Console.WriteLine("You missed!");
-                return 0;
+                return 0; // no dmg
             }
-            else if (roll > 1 && roll <= 8)
+            else if (roll > 1 && roll <= 8) // reg attack, base dmg
             {
                 int baseDmg = this.AttackPower;
                 Console.WriteLine($"You attack for {baseDmg} damage!");
                 return baseDmg;
             }
-            else // 9-10
+            else // 9-10, crit, basedmg * 2
             {
                 int baseDmg = this.AttackPower * 2;
                 Console.WriteLine($"You land a critical hit for {baseDmg} damage!");
@@ -65,15 +84,16 @@ namespace OOD_Final
             }
         }
 
+        // method to flee ** ADD TO ACTIONS! 
         public string Flee()
         {
-            string fleeNote;
+            string fleeNote; // return
 
             if (random.Next(1, 11) > 7) // 30% chance of failure
             {
                 fleeNote = "You tripped! Failed to flee.";
             }
-            else
+            else // flee succeeded
             {
                 fleeNote = "You escape with your life, but the enemy still roams...";
             }
@@ -81,14 +101,14 @@ namespace OOD_Final
             return fleeNote;
         }
 
-        // Take Damage
+        // Take Damage, update HP
         public void TakeDamage(int damage)
         {
             HitPoints -= damage;
             if (HitPoints < 0) HitPoints = 0;
         }
 
-        // Heal
+        // Heal ** ADD TO ACTIONSS!
         public string Heal()
         {
             string healNote = "You used a health potion and healed for 75 HP.";

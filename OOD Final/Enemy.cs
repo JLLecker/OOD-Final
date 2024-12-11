@@ -22,12 +22,13 @@ namespace OOD_Final.EnemyClass
             AttackPower = attackPower;
         }
 
+        // tostring for enemy info
         public override string ToString()
         {
             return $"{Type} - HP: {HitPoints}, ATK: {AttackPower}";
         }
 
-        // Attack Roll 
+        // Attack Roll - hit, miss, crit
         public int AttackRoll(Enemy enemy)
         {
             int roll = random.Next(1, 11); // random roll between 1-10
@@ -52,12 +53,14 @@ namespace OOD_Final.EnemyClass
             }
         }
 
+        // method for taking damage, calcultes HP change
         public void TakeDamage(int damage)
         {
             HitPoints -= damage;
             if (HitPoints < 0) HitPoints = 0;
         }
 
+        // whether enemy is alive
         public bool IsAlive()
         {
             return HitPoints > 0;

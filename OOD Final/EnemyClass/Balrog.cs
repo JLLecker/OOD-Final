@@ -11,6 +11,7 @@ namespace OOD_Final.EnemyClass
         public Balrog(string type, int hitPoints, int attackPower) 
             : base(type, hitPoints, attackPower) 
         { 
+            // custom properties
         }
     }
 }

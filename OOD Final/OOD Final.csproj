@@ -49,15 +49,10 @@
     <Compile Include="Actions\ShieldAttack.cs" />
     <Compile Include="Actions\SneakAttack.cs" />
     <Compile Include="Actions\SpellAttack.cs" />
-    <Compile Include="CharClass\Character.cs" />
-    <Compile Include="CharClass\Archer.cs" />
-    <Compile Include="CharClass\Knight.cs" />
-    <Compile Include="CharClass\Mage.cs" />
-    <Compile Include="CharClass\Thief.cs" />
-    <Compile Include="CharClass\Warrior.cs" />
+    <Compile Include="Character.cs" />
     <Compile Include="EnemyClass\Balrog.cs" />
     <Compile Include="EnemyClass\Dragon.cs" />
-    <Compile Include="EnemyClass\Enemy.cs" />
+    <Compile Include="Enemy.cs" />
     <Compile Include="EnemyClass\Ent.cs" />
     <Compile Include="EnemyClass\Hellhound.cs" />
     <Compile Include="EnemyClass\Kobold.cs" />

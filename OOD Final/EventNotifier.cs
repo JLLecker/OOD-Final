@@ -10,19 +10,23 @@ namespace OOD_Final
 {
     public class EventNotifier : ISubject
     {
+        // list of observers
         private readonly List<IObserver> _observers = new List<IObserver>();
 
+        // add observer to list
         public void AddObserver(IObserver observer)
         {
             if (observer == null) throw new ArgumentNullException(nameof(observer));
             _observers.Add(observer);
         }
 
+        // remove observer from list
         public void RemoveObserver(IObserver observer)
         {
             _observers.Remove(observer);
         }
 
+        // method to push notification to observers in list
         public void NotifyObservers(string eventMessage, bool isDeathNofication = false)
         {
             bool dead = isDeathNofication;

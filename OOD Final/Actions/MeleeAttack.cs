@@ -9,6 +9,9 @@ namespace OOD_Final.Actions
 {
     public class MeleeAttack : IAction
     {
-        public string Attack() => "Performs a strong melee attack!";
+        public string Attack() // returns atk details
+        {
+            return "You perform a strong melee attack!";
+        }
     }
 }
